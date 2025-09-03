@@ -1,0 +1,10 @@
+
+Begriffe und Erläuterungen
+
+Normalisierung = Konsistenzen (bspw. Abhängigkeiten), Anomalien, Redundanzen; Normalformen (1. NF, 2. NF, 3. NF)
+
+Datenmodelle = Relational vs. NoSQL
+
+Modellierung = Entitäten, Beziehungen und Kardinalität (ERM: Entity-Relationship-Modell; ER-Diagramm -> grafische Darstellung)
+
+Syntax

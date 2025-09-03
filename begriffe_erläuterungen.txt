@@ -1,0 +1,22 @@
+
+Keys: Primary und Secondary bzw. Foreign
+
+Atomar / Nicht-atomar (verstoß gegen 1NF) = unzerteilbar im Kontext zur Anwendung
+
+Datenbank-Management-System (DBMS) = MySQL Workbench; MongoDB
+
+Welche Daten-Formate existieren außerhalb von Texten (Strings), Bildern (2D) oder Videos? Einige (bspw. Audio oder 3D)
+Welche Art von Daten sind strukturiert, wenn Texte, Bilder oder Videos unstrukturiert sind? Numerische oder kategoriale Daten
+
+Die fünf Big Data Vs:
+- Volumen
+- Variety
+- Velocity
+- Veracity
+- Value
+
+ACID-Modell:
+- Atomicity
+- Consistency
+- Isolation
+- Durability
