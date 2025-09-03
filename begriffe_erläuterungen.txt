@@ -1,7 +1,7 @@
 
 Keys: Primary und Secondary bzw. Foreign
 
-Atomar / Nicht-atomar (verstoß gegen 1NF) = unzerteilbar im Kontext zur Anwendung
+Atomar / Nicht-atomar (verstoß gegen 1NF) = unzerteilbar im Kontext zur Logik der Anwendung
 
 Datenbank-Management-System (DBMS) = MySQL Workbench; MongoDB
 
