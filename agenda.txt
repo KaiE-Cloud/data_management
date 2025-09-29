@@ -3,7 +3,18 @@ Begriffe und Erläuterungen
 
 Modellierung                       = Entitäten, Beziehungen und Kardinalität (ERM: Entity-Relationship-Modell; ER-Diagramm -> grafische Darstellung)
 
-Normalisierung (Chaos -> Struktur) = Konsistenzen (bspw. Abhängigkeiten), Anomalien, Redundanzen; Normalformen (1. NF, 2. NF, 3. NF)
+Normalisierung (Chaos -> Struktur) = Konsistenzen (bspw. Abhängigkeiten definiert mit PKs und FKs), Anomalien, Redundanzen; Normalformen (1. NF, 2. NF, 3. NF)
+                                     Ruleset for 1. NF
+                                     Atomicity:
+                                       Each cell (intersection of a row and column) must hold a single, atomic value.
+                                       No sets, arrays, lists, or nested tables are allowed in a field.
+                                     Uniqueness of Rows:
+                                       Every row in the table must be uniquely identifiable, usually via a primary key.
+                                     Consistent Data Types:
+                                       All values in a column must be of the same data type.
+                                     No Repeating Groups or Columns:
+                                       The table should not contain repeating groups (e.g., columns like Phone1, Phone2, etc.).
+                                       Each attribute should represent a single concept.
 
 Datenmodelle                       = Relational vs. NoSQL
 

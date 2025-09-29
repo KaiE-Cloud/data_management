@@ -1,79 +1,267 @@
 erdiagram Nahrungsmittel
 notation=default
 
-entity general_product_information {
-    PK__product_id key
-    producer_product_id key
-    producer_version_id key
-    producer_de key
-    lc key
-    abbreviated_product_name_fr key
-    quatity key
-    serving_size key
-    brands key
-    brands_tags key
-    brand_owner key
-    categories key
-    categories_tags key
-    labels key
-    labels_tags key
-    countries key
-    countries_tags key
-    stores key
-    stores_tags key
-    obsolete key
-    obsolete_since_date key
-    origins key
-    origins_tags key
-    origin_de key
-    origin_en key
-    origin_fr key
-    manufacturing_places key
-    manufacturing_places_tags key
-    emb_codes key
-    emb_codes_tags key
-    allergens key
-    allergens_tags key
-    traces key
-    traces_tags key
-    no_nutrition_data key
+
+
+
+// Core Product & Identification
+
+entity Product {
+  product_id  
+  code
+  lc
+  quantity
+  serving_size
+  obsolete
+  obsolete_since_date
+  link
+  packaging_id
 }
 
-entity productname_langs {
-    
+entity ProductTranslation {
+  product_id
+  language_code
+  product_name
+  abbreviated_product_name
+  generic_name
 }
 
-entity genericname_langs {
-    
+entity Producer {
+  product_id 
+  producer_product_id
+  producer_version_id
+  producer_de
+  brand_owner
 }
 
-entity packaging_details {
-    
+entity Brand {
+  product_id
+  brands
+  brands_tags
 }
 
-entity nutritional_information {
-    
+entity Category {
+  product_id
+  categories
+  categories_tags
+  food_groups
+  food_groups_tags
+  nova_groups
+  nova_groups_tags
 }
 
-entity ingredients_list {
-    
-}
-
-entity minerals {
-    
-}
-
-entity vitamins {
-    
-}
-
-entity fats {
-    
+entity Store {
+  product_id
+  stores
+  stores_tags
+  countries
+  countries_tags
 }
 
 
+// Composition & Ingredients
+
+entity IngredientTranslation {
+  product_id
+  language_code
+  ingredients_text
+}
+
+entity Allergen {
+  product_id
+  allergens
+  allergens_tags
+  traces
+  traces_tags
+}
+
+entity Origin {
+  product_id
+  origins
+  origins_tags
+  manufacturing_places
+  manufacturing_places_tags
+  emb_codes
+  emb_codes_tags
+}
+
+entity OriginTranslation {
+  product_id
+  language_code
+  origin
+}
+
+entity Packaging {
+  packaging_id
+  packaging
+  packaging_tags
+  packaging_number
+  packaging_shape
+  packaging_material
+  packaging_recycling
+  packaging_weight_measured
+}
+
+entity PackagingTranslation {
+  product_id
+  packaging_id
+  language_code
+  packaging_text
+}
 
 
-relationship Rel {
-    general_product_information[1] -> packaging_details[1]
+// Nutrition
+
+entity NutritionFact {
+  product_id
+  nutrition_data_per
+  nutrition_data_prepared_per
+  nutrient_name
+  nutrient_value
+  nutrient_unit____unit_id
+  nutrient_prepared_value
+  nutrient_prepared_unit____unit_id
+}
+
+entity Nutrient {
+  nutrient_name
+  nutrient_group
+  nutrient_unit____unit_id
+}
+
+entity Unit {
+  unit_id
+  unit_name
+  unit_symbol
+  conversion_factor_to_base
+}
+
+
+// Classification & Scoring
+
+entity Label {
+  product_id
+  labels
+  labels_tags
+}
+
+entity Score {
+  product_id
+  nutriscore_grade_producer
+  nutriscore_grade
+  nutriscore_score
+  environmental_score_grade
+  environmental_score_score
+  packaging_score
+  origins_score
+  production_system_score
+  threatened_species_score
+}
+
+
+// Reference & Metadata
+
+entity ReferenceData {
+  product_id
+  conservation_conditions_fr
+  preparation_fr
+  customer_service_fr
+  data_sources
+  sources_fields
+}
+
+
+
+
+
+
+
+
+// Relationships
+
+// Entity Product
+
+relationship Product_1 {
+  Product -> ProductTranslation
+}
+
+relationship Product_2 {
+  Product -> NutritionFact
+}
+
+relationship Product_3 {
+  Product -> Producer
+}
+
+relationship Product_4 {
+  Product -> Label
+}
+
+relationship Product_5 {
+  Product -> Brand
+}
+
+relationship Product_6 {
+  Product -> Store
+}
+
+relationship Product_7 {
+  Product -> Allergen
+}
+
+relationship Product_8 {
+  Product -> IngredientTranslation
+}
+
+relationship Product_9 {
+  Product -> Category
+}
+
+relationship Product_10 {
+  Product -> ReferenceData
+}
+
+relationship Product_11 {
+  Product -> Origin
+}
+
+relationship Product_12 {
+  Product -> OriginTranslation
+}
+
+relationship Product_13 {
+  Product -> Score
+}
+
+relationship Product_14 {
+  Product -> PackagingTranslation
+}
+
+
+// Entity Packaging
+
+relationship Packaging_1 {
+  Packaging -> Product
+}
+
+relationship Packaging_2 {
+  Packaging -> PackagingTranslation
+}
+
+
+// Entity Nutrient
+
+relationship Nutrient_1 {
+  Nutrient -> NutritionFact
+}
+
+
+// Entity Unit
+
+relationship Unit_1 {
+  Unit -> Nutrient
+}
+
+relationship Unit_2 {
+  Unit -> NutritionFact
 }
