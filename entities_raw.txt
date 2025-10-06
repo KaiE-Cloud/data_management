@@ -184,7 +184,7 @@ entity ProductPackagingtype {
 
 
 // Nutrition
-
+// not reviewed ////////////////////////////////////////////////////////////////////////////
 entity NutritionFact {
   product_id
   nutrition_data_per
@@ -213,23 +213,9 @@ entity Unit {
 // Classification & Scoring
 
 entity Label {
-  label_id
-  label_name
-}
-
-entity Labeltag {
-  label_tag_id
-  label_tag_name
-}
-
-entity LabelLabeltag {
-  label_id
-  label_tag_id
-}
-
-entity ProductLabel {
   product_id
-  label_id
+  labels
+  labels_tags
 }
 
 entity Score {
@@ -240,23 +226,23 @@ entity Score {
   environmental_score_grade
   environmental_score_score
   packaging_score
-  origins_of_ingredients_score
+  origins_score
   production_system_score
   threatened_species_score
 }
 
 
 // Reference & Metadata
-// not atomized ///////////////////////////////////////////////////////////////////////////
+
 entity ReferenceData {
   product_id
   conservation_conditions_fr
   preparation_fr
   customer_service_fr
-  data_sources // not atomized
+  data_sources
   sources_fields
 }
-// not atomized ///////////////////////////////////////////////////////////////////////////
+
 
 
 
