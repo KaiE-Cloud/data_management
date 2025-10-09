@@ -7,7 +7,7 @@ notation=default
 // Core Product & Identification
 
 entity Product {
-  product_id  
+  PK__product_id key
   code
   lc
   quantity
@@ -15,21 +15,20 @@ entity Product {
   obsolete
   obsolete_since_date
   link
-  packaging_id
   nova_group
   nova_group_tag
 }
 
-entity ProductTranslation {
-  product_id
-  language_code
-  product_name
-  abbreviated_product_name
-  generic_name
+weak entity Producttranslation {
+  PK__FK__product_id partial-key
+  PK__language_code partial-key
+  product_translation
+  abbreviated_product_translation
+  generic_translation
 }
 
-entity Producer {
-  product_id 
+weak entity Producer {
+  PK__FK__product_id partial-key
   producer_product_id
   producer_version_id
   producer_de
@@ -37,116 +36,116 @@ entity Producer {
 }
 
 entity Brand {
-  brand_id
+  PK__brand_id key
   brand_name
   brand_tag
 }
 
 entity ProductBrand {
-  product_id
-  brand_id
+  PK__FK__product_id key
+  PK__FK__brand_id key
 }
 
 entity Category {
-  category_id
+  PK__category_id key
   category_name
   category_tag
 }
 
 entity ProductCategory {
-  product_id
-  category_id
+  PK__FK__product_id key
+  PK__FK__category_id key
 }
 
 entity Foodgroup {
-  food_group_id
+  PK__food_group_id key
   food_group_name
 }
 
 entity Foodgrouptag {
-  food_group_tag_id
+  PK__food_group_tag_id key
   food_group_tag_name
 }
 
 entity FoodgroupFoodgrouptag {
-  food_group_id
-  food_group_tag_id
+  PK__FK__food_group_id key
+  PK__FK__food_group_tag_id key
 }
 
 entity ProductFoodgroup {
-  product_id
-  food_group_id
+  PK__FK__product_id key
+  PK__FK__food_group_id key
 }
 
 entity Store {
-  store_id
+  PK__store_id key
   store_name
   store_tag
 }
 
 entity ProductStore {
-  product_id
-  store_id
+  PK__FK__product_id key
+  PK__FK__store_id key
 }
 
 entity Country {
-  country_id
+  PK__country_id key
   country_name
   country_tag
 }
 
 entity ProductCountry {
-  product_id
-  country_id
+  PK__FK__product_id key
+  PK__FK__country_id key
 }
 
 
 // Composition & Ingredients
 entity Ingredienttranslation {
-  ingredient_translation_id____+
+  PK__ingredient_translation_id key
   language_code
-  ingredient_name
+  ingredient_translation
 }
 
 entity ProductIngredienttranslation {
-  product_id
-  ingredient_translation_id____lc
+  PK__FK__product_id key
+  PK__FK__ingredient_translation_id key
 }
 
 entity Ingredient {
-  ingredient_id
+  PK__ingredient_id key
   ingredient_name
 }
 
 entity ProductIngredient {
-  product_id
-  ingredient_id
+  PK__FK__product_id key
+  PK__FK__ingredient_id key
 }
 
 entity Allergen {
-  allergen_id
+  PK__allergen_id key
   allergen_name
   allergen_tag
 }
 
 entity Trace {
-  trace_id
+  PK__trace_id key
   trace_name
   trace_tag
 }
 
 entity ProductAllergen {
-  product_id
-  allergen_id
+  PK__FK__product_id key
+  PK__FK__allergen_id key
 }
 
 entity ProductTrace {
-  product_id
-  trace_id
+  PK__FK__product_id key
+  PK__FK__trace_id key
 }
 
-entity Origin {
-  product_id
+weak entity Origin {
+  PK__FK__product_id partial-key
   origin_name
   origin_tag
   manufacturing_place
@@ -155,15 +154,15 @@ entity Origin {
   emb_code_tag
 }
 
-entity OriginTranslation {
-  product_id
-  language_code____+
-  origin_name
+weak entity Origintranslation {
+  PK__FK__product_id partial-key
+  PK__language_code partial-key
+  origin_translation
 }
 
-entity Packaging {
-  product_id
-  packaging_level____+
+weak entity Packaging {
+  PK__FK__product_id partial-key
+  PK__packaging_level partial-key
   packaging_number
   packaging_shape
   packaging_material
@@ -172,91 +171,111 @@ entity Packaging {
 }
 
 entity Packagingtype {
-  packaging_type_id
+  PK__packaging_type_id key
   packaging_type_name
   packaging_type_tag
 }
 
 entity ProductPackagingtype {
-  product_id
-  packaging_type_id
+  PK__FK__product_id key
+  PK__FK__packaging_type_id key
 }
 
 
 // Nutrition
 
-entity NutritionFact {
-  product_id
-  nutrition_data_per
-  nutrition_data_prepared_per
-  nutrient_name____+
+weak entity Nutrientfact {
+  PK__FK__product_id partial-key
+  PK__FK__nutrient_name partial-key
   nutrient_value
-  nutrient_unit____unit_id
   nutrient_prepared_value
-  nutrient_prepared_unit____unit_id
+  FK__unit_id key
 }
 
 entity Nutrient {
-  nutrient_name
+  PK__nutrient_name key
   nutrient_group
-  nutrient_unit____unit_id
+  FK__unit_id key
 }
 
 entity Unit {
-  unit_id
+  PK__unit_id key
   unit_name
   unit_symbol
   conversion_factor_to_base
+}
+
+weak entity Nutritionfact {
+  PK__FK__product_id partial-key
+  nutrition_data_per
+  nutrition_data_prepared_per
 }
 
 
 // Classification & Scoring
 
 entity Label {
-  label_id
+  PK__label_id key
   label_name
 }
 
 entity Labeltag {
-  label_tag_id
+  PK__label_tag_id key
   label_tag_name
 }
 
 entity LabelLabeltag {
-  label_id
-  label_tag_id
+  PK__FK__label_id key
+  PK__FK__label_tag_id key
 }
 
 entity ProductLabel {
-  product_id
-  label_id
+  PK__FK__product_id key
+  PK__FK__label_id key
 }
 
-entity Score {
-  product_id
+weak entity Score {
+  PK__FK__product_id partial-key
   nutriscore_grade_producer
   nutriscore_grade
   nutriscore_score
   environmental_score_grade
   environmental_score_score
   packaging_score
-  origins_of_ingredients_score
+  origin_of_ingredients_score
   production_system_score
   threatened_species_score
 }
 
 
 // Reference & Metadata
-// not atomized ///////////////////////////////////////////////////////////////////////////
-entity ReferenceData {
-  product_id
+
+weak entity Referencedata {
+  PK__FK__product_id partial-key
   conservation_conditions_fr
   preparation_fr
   customer_service_fr
-  data_sources // not atomized
-  sources_fields
 }
-// not atomized ///////////////////////////////////////////////////////////////////////////
+
+entity Datasource {
+  PK__data_source_id key
+  data_source
+  source_field_publication
+}
+
+entity ProductDatasource {
+  PK__FK__prodcut_id key
+  PK__FK__data_source_id key
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -267,7 +286,7 @@ entity ReferenceData {
 // Relationships
 
 // Entity Product
-
+/*
 relationship Product_1 {
   Product -> ProductTranslation
 }
@@ -352,3 +371,4 @@ relationship Unit_1 {
 relationship Unit_2 {
   Unit -> NutritionFact
 }
+*/
