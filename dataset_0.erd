@@ -282,79 +282,92 @@ entity ProductDatasource {
 // Relationships
 
 // Entity Product
-/*
+
 relationship Product_1 {
-  Product -> ProductTranslation
+  Product -> Packaging
 }
 
 relationship Product_2 {
-  Product -> NutritionFact
+  Product -> ProductPackagingtype
 }
 
 relationship Product_3 {
-  Product -> Producer
-}
-
-relationship Product_4 {
-  Product -> Label
-}
-
-relationship Product_5 {
-  Product -> Brand
-}
-
-relationship Product_6 {
-  Product -> Store
-}
-
-relationship Product_7 {
-  Product -> Allergen
-}
-
-relationship Product_8 {
-  Product -> IngredientTranslation
-}
-
-relationship Product_9 {
-  Product -> Category
-}
-
-relationship Product_10 {
-  Product -> ReferenceData
-}
-
-relationship Product_11 {
-  Product -> Origin
-}
-
-relationship Product_12 {
-  Product -> OriginTranslation
-}
-
-relationship Product_13 {
   Product -> Score
 }
 
+relationship Product_4 {
+  Product -> Origin
+}
+
+relationship Product_5 {
+  Product -> Producttranslation
+}
+
+relationship Product_6 {
+  Product -> Nutrientfact
+}
+
+relationship Product_7 {
+  Product -> Referencedata
+}
+
+relationship Product_8 {
+  Product -> Producer
+}
+
+relationship Product_9 {
+  Product -> Nutritionfact
+}
+
+relationship Product_10 {
+  Product -> Origintranslation
+}
+
+relationship Product_11 {
+  Product -> ProductDatasource
+}
+
+relationship Product_12 {
+  Product -> ProductFoodgroup
+}
+
+relationship Product_13 {
+  Product -> ProductIngredient
+}
+
 relationship Product_14 {
-  Product -> PackagingTranslation
+  Product -> ProductCategory
 }
 
-
-// Entity Packaging
-
-relationship Packaging_1 {
-  Packaging -> Product
+relationship Product_15 {
+  Product -> ProductAllergen
 }
 
-relationship Packaging_2 {
-  Packaging -> PackagingTranslation
+relationship Product_16 {
+  Product -> ProductCountry
+}
+
+relationship Product_17 {
+  Product -> ProductLabel
+}
+
+relationship Product_18 {
+  Product -> ProductTrace
+}
+
+relationship Product_19 {
+  Product -> ProductStore
+}
+
+relationship Product_20 {
+  Product -> ProductBrand
 }
 
 
 // Entity Nutrient
 
 relationship Nutrient_1 {
-  Nutrient -> NutritionFact
+  Nutrient -> Nutrientfact
 }
 
 
@@ -365,6 +378,5 @@ relationship Unit_1 {
 }
 
 relationship Unit_2 {
-  Unit -> NutritionFact
+  Unit -> Nutrientfact
 }
-*/
