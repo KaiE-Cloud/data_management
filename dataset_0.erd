@@ -17,10 +17,11 @@ entity Product {
   link
   nova_group
   nova_group_tag
+  source_field_publication
 }
 
 weak entity Producttranslation {
-  PK__FK__product_id partial-key
+  PK__FK__product_id key
   PK__language_code partial-key
   product_translation
   abbreviated_product_translation
@@ -28,7 +29,7 @@ weak entity Producttranslation {
 }
 
 weak entity Producer {
-  PK__FK__product_id partial-key
+  PK__FK__product_id key
   producer_product_id
   producer_version_id
   producer_de
@@ -101,16 +102,6 @@ entity ProductCountry {
 
 
 // Composition & Ingredients
-entity Ingredienttranslation {
-  PK__ingredient_translation_id key
-  language_code
-  ingredient_translation
-}
-
-entity ProductIngredienttranslation {
-  PK__FK__product_id key
-  PK__FK__ingredient_translation_id key
-}
 
 entity Ingredient {
   PK__ingredient_id key
@@ -120,6 +111,12 @@ entity Ingredient {
 entity ProductIngredient {
   PK__FK__product_id key
   PK__FK__ingredient_id key
+}
+
+weak entity Ingredienttranslation {
+  PK__FK__ingredient_id key
+  PK__language_code partial-key
+  ingredient_translation
 }
 
 entity Allergen {
@@ -145,7 +142,7 @@ entity ProductTrace {
 }
 
 weak entity Origin {
-  PK__FK__product_id partial-key
+  PK__FK__product_id key
   origin_name
   origin_tag
   manufacturing_place
@@ -155,13 +152,13 @@ weak entity Origin {
 }
 
 weak entity Origintranslation {
-  PK__FK__product_id partial-key
+  PK__FK__product_id key
   PK__language_code partial-key
   origin_translation
 }
 
 weak entity Packaging {
-  PK__FK__product_id partial-key
+  PK__FK__product_id key
   PK__packaging_level partial-key
   packaging_number
   packaging_shape
@@ -185,8 +182,8 @@ entity ProductPackagingtype {
 // Nutrition
 
 weak entity Nutrientfact {
-  PK__FK__product_id partial-key
-  PK__FK__nutrient_name partial-key
+  PK__FK__product_id key
+  PK__FK__nutrient_name key
   nutrient_value
   nutrient_prepared_value
   FK__unit_id key
@@ -206,7 +203,7 @@ entity Unit {
 }
 
 weak entity Nutritionfact {
-  PK__FK__product_id partial-key
+  PK__FK__product_id key
   nutrition_data_per
   nutrition_data_prepared_per
 }
@@ -235,7 +232,7 @@ entity ProductLabel {
 }
 
 weak entity Score {
-  PK__FK__product_id partial-key
+  PK__FK__product_id key
   nutriscore_grade_producer
   nutriscore_grade
   nutriscore_score
@@ -251,7 +248,7 @@ weak entity Score {
 // Reference & Metadata
 
 weak entity Referencedata {
-  PK__FK__product_id partial-key
+  PK__FK__product_id key
   conservation_conditions_fr
   preparation_fr
   customer_service_fr
@@ -260,7 +257,6 @@ weak entity Referencedata {
 entity Datasource {
   PK__data_source_id key
   data_source
-  source_field_publication
 }
 
 entity ProductDatasource {
