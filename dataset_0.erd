@@ -28,7 +28,7 @@ weak entity Producttranslation {
   generic_translation
 }
 
-weak entity Producer {
+weak entity Producer { //////////////////////////////////////// perhaps redundant; possible duplicates
   PK__FK__product_id key
   producer_product_id
   producer_version_id
@@ -157,7 +157,7 @@ weak entity Origintranslation {
   origin_translation
 }
 
-weak entity Packaging {
+weak entity Packaging { //////////////////////////////////////// possibly m to n; possible duplicates
   PK__FK__product_id key
   PK__packaging_level partial-key
   packaging_number
@@ -202,7 +202,7 @@ entity Unit {
   conversion_factor_to_base
 }
 
-weak entity Nutritionfact {
+weak entity Nutritionfact { //////////////////////////////////////// duplicates
   PK__FK__product_id key
   nutrition_data_per
   nutrition_data_prepared_per
@@ -283,100 +283,173 @@ entity ProductDatasource {
 
 // Entity Product
 
-relationship Product_1 {
-  Product -> Packaging
+weak relationship Product_1 {
+  Product[1] -> Producttranslation[1]
 }
 
-relationship Product_2 {
-  Product -> ProductPackagingtype
+weak relationship Product_2 {
+  Product[1] -> Producer[1] //////////////////////////////////////// perhaps redundant; possible duplicates
 }
 
-relationship Product_3 {
-  Product -> Score
+weak relationship Product_3 {
+  Product[1] -> Packaging[N] //////////////////////////////////////// possibly m to n; possible duplicates
 }
 
-relationship Product_4 {
-  Product -> Origin
+weak relationship Product_4 {
+  Product[1] -> Origin[1]
 }
 
-relationship Product_5 {
-  Product -> Producttranslation
+weak relationship Product_5 {
+  Product[1] -> Origintranslation[1]
 }
 
-relationship Product_6 {
-  Product -> Nutrientfact
+weak relationship Product_6 {
+  Product[1] -> Nutrientfact[1] //////////////////////////////////////// duplicates
 }
 
-relationship Product_7 {
-  Product -> Referencedata
+weak relationship Product_7 {
+  Product[1] -> Nutritionfact[1]
 }
 
-relationship Product_8 {
-  Product -> Producer
+weak relationship Product_8 {
+  Product[1] -> Score[1]
 }
 
-relationship Product_9 {
-  Product -> Nutritionfact
+weak relationship Product_9 {
+  Product[1] -> Referencedata[1]
 }
 
 relationship Product_10 {
-  Product -> Origintranslation
+  Product[1] -> ProductPackagingtype[1]
 }
 
 relationship Product_11 {
-  Product -> ProductDatasource
+  Product[1] -> ProductDatasource[1]
 }
 
 relationship Product_12 {
-  Product -> ProductFoodgroup
+  Product[1] -> ProductFoodgroup[1]
 }
 
 relationship Product_13 {
-  Product -> ProductIngredient
+  Product[1] -> ProductIngredient[1]
 }
 
 relationship Product_14 {
-  Product -> ProductCategory
+  Product[1] -> ProductCategory[1]
 }
 
 relationship Product_15 {
-  Product -> ProductAllergen
+  Product[1] -> ProductAllergen[1]
 }
 
 relationship Product_16 {
-  Product -> ProductCountry
+  Product[1] -> ProductCountry[1]
 }
 
 relationship Product_17 {
-  Product -> ProductLabel
+  Product[1] -> ProductLabel[1]
 }
 
 relationship Product_18 {
-  Product -> ProductTrace
+  Product[1] -> ProductTrace[1]
 }
 
 relationship Product_19 {
-  Product -> ProductStore
+  Product[1] -> ProductStore[1]
 }
 
 relationship Product_20 {
-  Product -> ProductBrand
+  Product[1] -> ProductBrand[1]
 }
 
 
 // Entity Nutrient
 
-relationship Nutrient_1 {
-  Nutrient -> Nutrientfact
+weak relationship Nutrient_1 {
+  Nutrient[1] -> Nutrientfact[1]
 }
 
 
 // Entity Unit
 
 relationship Unit_1 {
-  Unit -> Nutrient
+  Unit[1] -> Nutrient[1]
 }
 
 relationship Unit_2 {
-  Unit -> Nutrientfact
+  Unit[1] -> Nutrientfact[1]
+}
+
+
+// Junctions
+
+relationship Junction_1 {
+  Store[1] -> ProductStore[1]
+}
+
+relationship Junction_2 {
+  Trace[1] -> ProductTrace[1]
+}
+
+relationship Junction_3 {
+  Brand[1] -> ProductBrand[1]
+}
+
+relationship Junction_4 {
+  Datasource[1] -> ProductDatasource[1]
+}
+
+relationship Junction_5 {
+  Country[1] -> ProductCountry[1]
+}
+
+relationship Junction_6 {
+  Allergen[1] -> ProductAllergen[1]
+}
+
+relationship Junction_7 {
+  Category[1] -> ProductCategory[1]
+}
+
+relationship Junction_8 {
+  Packagingtype[1] -> ProductPackagingtype[1]
+}
+
+relationship Junction_9 {
+  Ingredient[1] -> ProductIngredient[1]
+}
+
+relationship Junction_10 {
+  Label[1] -> ProductLabel[1]
+}
+
+relationship Junction_11 {
+  Foodgroup[1] -> ProductFoodgroup[1]
+}
+
+
+// Translations
+
+weak relationship Translation_1 {
+  Ingredient[1] -> Ingredienttranslation[1]
+}
+
+
+// Tags
+
+relationship Tag_1 {
+  Label[1] -> LabelLabeltag[1]
+}
+
+relationship Tag_2 {
+  Labeltag[1] -> LabelLabeltag[1]
+}
+
+relationship Tag_3 {
+  Foodgroup[1] -> FoodgroupFoodgrouptag[1]
+}
+
+relationship Tag_4 {
+  Foodgrouptag[1] -> FoodgroupFoodgrouptag[1]
 }
