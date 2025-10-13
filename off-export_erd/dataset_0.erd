@@ -318,138 +318,138 @@ weak relationship Product_8 {
 weak relationship Product_9 {
   Product[1] -> Referencedata[1]
 }
-
+///////////////////////////////////////////////////////////////////////////////////
 relationship Product_10 {
-  Product[1] -> ProductPackagingtype[1]
+  Product[1] -> ProductPackagingtype[N]
 }
 
 relationship Product_11 {
-  Product[1] -> ProductDatasource[1]
+  Product[1] -> ProductDatasource[N]
 }
 
 relationship Product_12 {
-  Product[1] -> ProductFoodgroup[1]
+  Product[1] -> ProductFoodgroup[N]
 }
 
 relationship Product_13 {
-  Product[1] -> ProductIngredient[1]
+  Product[1] -> ProductIngredient[N]
 }
 
 relationship Product_14 {
-  Product[1] -> ProductCategory[1]
+  Product[1] -> ProductCategory[N]
 }
 
 relationship Product_15 {
-  Product[1] -> ProductAllergen[1]
+  Product[1] -> ProductAllergen[N]
 }
 
 relationship Product_16 {
-  Product[1] -> ProductCountry[1]
+  Product[1] -> ProductCountry[N]
 }
 
 relationship Product_17 {
-  Product[1] -> ProductLabel[1]
+  Product[1] -> ProductLabel[N]
 }
 
 relationship Product_18 {
-  Product[1] -> ProductTrace[1]
+  Product[1] -> ProductTrace[N]
 }
 
 relationship Product_19 {
-  Product[1] -> ProductStore[1]
+  Product[1] -> ProductStore[N]
 }
 
 relationship Product_20 {
-  Product[1] -> ProductBrand[1]
+  Product[1] -> ProductBrand[N]
 }
 
 
 // Entity Nutrient
 
 weak relationship Nutrient_1 {
-  Nutrient[1] -> Nutrientfact[1]
+  Nutrient[1] -> Nutrientfact[N]
 }
 
 
 // Entity Unit
 
 relationship Unit_1 {
-  Unit[1] -> Nutrient[1]
+  Unit[1] -> Nutrient[N]
 }
 
 relationship Unit_2 {
-  Unit[1] -> Nutrientfact[1]
+  Unit[1] -> Nutrientfact[N]
 }
 
 
 // Junctions
 
 relationship Junction_1 {
-  Store[1] -> ProductStore[1]
+  Store[1] -> ProductStore[N]
 }
 
 relationship Junction_2 {
-  Trace[1] -> ProductTrace[1]
+  Trace[1] -> ProductTrace[N]
 }
 
 relationship Junction_3 {
-  Brand[1] -> ProductBrand[1]
+  Brand[1] -> ProductBrand[N]
 }
 
 relationship Junction_4 {
-  Datasource[1] -> ProductDatasource[1]
+  Datasource[1] -> ProductDatasource[N]
 }
 
 relationship Junction_5 {
-  Country[1] -> ProductCountry[1]
+  Country[1] -> ProductCountry[N]
 }
 
 relationship Junction_6 {
-  Allergen[1] -> ProductAllergen[1]
+  Allergen[1] -> ProductAllergen[N]
 }
 
 relationship Junction_7 {
-  Category[1] -> ProductCategory[1]
+  Category[1] -> ProductCategory[N]
 }
 
 relationship Junction_8 {
-  Packagingtype[1] -> ProductPackagingtype[1]
+  Packagingtype[1] -> ProductPackagingtype[N]
 }
 
 relationship Junction_9 {
-  Ingredient[1] -> ProductIngredient[1]
+  Ingredient[1] -> ProductIngredient[N]
 }
 
 relationship Junction_10 {
-  Label[1] -> ProductLabel[1]
+  Label[1] -> ProductLabel[N]
 }
 
 relationship Junction_11 {
-  Foodgroup[1] -> ProductFoodgroup[1]
+  Foodgroup[1] -> ProductFoodgroup[N]
 }
 
 
 // Translations
 
 weak relationship Translation_1 {
-  Ingredient[1] -> Ingredienttranslation[1]
+  Ingredient[1] -> Ingredienttranslation[N]
 }
 
 
 // Tags
 
 relationship Tag_1 {
-  Label[1] -> LabelLabeltag[1]
+  Label[1] -> LabelLabeltag[N]
 }
 
 relationship Tag_2 {
-  Labeltag[1] -> LabelLabeltag[1]
+  Labeltag[1] -> LabelLabeltag[N]
 }
 
 relationship Tag_3 {
-  Foodgroup[1] -> FoodgroupFoodgrouptag[1]
+  Foodgroup[1] -> FoodgroupFoodgrouptag[N]
 }
 
 relationship Tag_4 {
-  Foodgrouptag[1] -> FoodgroupFoodgrouptag[1]
+  Foodgrouptag[1] -> FoodgroupFoodgrouptag[N]
 }
