@@ -1,4 +1,5 @@
 
+
 Begriffe und Erläuterungen
 
 Modellierung                       = Entitäten, Beziehungen und Kardinalität (ERM: Entity-Relationship-Modell; ER-Diagramm -> grafische Darstellung)
@@ -19,3 +20,14 @@ Normalisierung (Chaos -> Struktur) = Konsistenzen (bspw. Abhängigkeiten definie
 Datenmodelle                       = Relational vs. NoSQL
 
 Syntax                             = SQL
+
+
+
+
+Architecure
+
+- Model Layer
+- Diagram Layer
+- SQL Layer (relational)
+- DMS Layer (MySQL Workbench)
+- Python Layer (SQL-Injection)
