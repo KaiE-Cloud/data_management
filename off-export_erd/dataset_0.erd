@@ -284,7 +284,7 @@ entity ProductDatasource {
 // Entity Product
 
 weak relationship Product_1 {
-  Product[1] -> Producttranslation[1]
+  Product[1] -> Producttranslation[N]
 }
 
 weak relationship Product_2 {
@@ -300,15 +300,15 @@ weak relationship Product_4 {
 }
 
 weak relationship Product_5 {
-  Product[1] -> Origintranslation[1]
+  Product[1] -> Origintranslation[N]
 }
 
 weak relationship Product_6 {
-  Product[1] -> Nutrientfact[1] //////////////////////////////////////// duplicates
+  Product[1] -> Nutrientfact[N]
 }
 
 weak relationship Product_7 {
-  Product[1] -> Nutritionfact[1]
+  Product[1] -> Nutritionfact[1] //////////////////////////////////////// duplicates
 }
 
 weak relationship Product_8 {
@@ -318,7 +318,7 @@ weak relationship Product_8 {
 weak relationship Product_9 {
   Product[1] -> Referencedata[1]
 }
-///////////////////////////////////////////////////////////////////////////////////
+
 relationship Product_10 {
   Product[1] -> ProductPackagingtype[N]
 }
