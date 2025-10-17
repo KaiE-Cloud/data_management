@@ -3,7 +3,7 @@ notation=default
 
 
 
-
+//Column Constraints (not inherited): NOT NULL ↔ DEFAULT NULL/'string'/-x.x +y.y/0,1/date,time,datetime; UNIQUE
 // Core Product & Identification
 
 entity Product {
