@@ -7,8 +7,8 @@ create table Product (
     obsolete boolean default 0,
     obsolete_since_date date,
     link varchar(255),
-    nova_group decimal(1, 0) not null,
-    nova_group_tag varchar(255) not null,
+    nova_group decimal(1, 0) not null default 4,
+    nova_group_tag varchar(255) not null default 'en:4-ultra-processed-food-and-drink-products',
     source_field_publication datetime,
     primary key (product_id)
 );
@@ -124,6 +124,7 @@ create table ProductCountry (
 
 
 
+# ! default attributes: nutrition_data_per; nutrition_data_prepared_per
 # Column Constraints (not inherited): NOT NULL ↔ DEFAULT NULL/'string'/-x.x +y.y/0,1/date,time,datetime; UNIQUE
 # Primary Modifiers: AUTO_INCREMENT (no inheritance necessary) -> automatically increase the value by 1 for each new row. Starting value and increments can be modified
 # Referential Actions (Foreign): ON UPDATE / ON DELETE: RESTRICT	-> Prevents deletion/update of parent rows if children exist.
