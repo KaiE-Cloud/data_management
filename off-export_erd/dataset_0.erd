@@ -3,7 +3,7 @@ notation=default
 
 
 
-//Column Constraints (not inherited): NOT NULL ↔ DEFAULT NULL/'string'/-x.x +y.y/0,1/date,time,datetime; UNIQUE
+
 // Core Product & Identification
 
 entity Product {
@@ -160,7 +160,7 @@ weak entity Origintranslation {
 weak entity Packaging { //////////////////////////////////////// possibly m to n; possible duplicates
   PK__FK__product_id key
   PK__packaging_level partial-key
-  packaging_number
+  packaging_number_of_units
   packaging_shape
   packaging_material
   packaging_recycling
