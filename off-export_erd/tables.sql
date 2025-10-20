@@ -203,7 +203,7 @@ create table Origintranslation (
     primary key (product_id, language_code),
     foreign key (product_id) references Product(product_id) on delete cascade
 );
-#################################################
+
 create table Packaging (
     product_id int,
     packaging_level decimal(1, 0),
@@ -218,8 +218,8 @@ create table Packaging (
 
 create table Packagingtype (
     packaging_type_id int auto_increment,
-    packaging_type_name varchar(255),
-    packaging_type_tag varchar(255),
+    packaging_type_name varchar(255) not null unique,
+    packaging_type_tag varchar(255) not null unique,
     primary key (packaging_type_id)
 );
 
@@ -230,11 +230,55 @@ create table ProductPackagingtype (
     foreign key (product_id) references Product(product_id) on delete cascade,
     foreign key (packaging_type_id) references Packagingtype(packaging_type_id)
 );
-#################################################
 
 
 
-# ! default attributes: nutrition_data_per; nutrition_data_prepared_per
+
+# Nutrition
+
+create table Nutrientfact (
+    product_id int,
+    nutrient_name varchar(255),
+    nutrient_value double not null,
+    nutrient_prepared_value double not null,
+    unit_id int not null,
+    primary key (product_id, nutrient_name),
+    foreign key (product_id) references Product(product_id) on delete cascade,
+    foreign key (nutrient_name) references Nutrient(nutrient_name),
+    foreign key (unit_id) references Unit(unit_id)
+);
+
+create table Nutrient (
+    nutrient_name varchar(255),
+    nutrient_group varchar(255) not null,
+    unit_id int not null,
+    primary key (nutrient_name),
+    foreign key (unit_id) references Unit(unit_id)
+);
+
+create table Unit (
+    unit_id int auto_increment,
+    unit_name varchar(255) not null unique,
+    unit_symbol varchar(255) not null unique,
+    conversion_factor_to_base double not null,
+    primary key (unit_id)
+);
+
+create table Nutritionfact (
+    product_id int,
+    nutrition_data_per varchar(255) not null default '100g',
+    nutrition_data_prepared_per varchar(255) not null default '100g',
+    primary key (product_id),
+    foreign key (product_id) references Product(product_id) on delete cascade
+);
+
+
+
+
+# Classification & Scoring
+
+
+
 
 # Column Constraints (not inherited): NOT NULL ↔ DEFAULT NULL/'string'/-x.x +y.y/0,1/date,time,datetime; UNIQUE
 # Primary Modifier: AUTO_INCREMENT (no inheritance necessary) -> automatically increase the value by 1 for each new row. Starting value and increments can be modified
