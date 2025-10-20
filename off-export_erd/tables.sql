@@ -277,6 +277,77 @@ create table Nutritionfact (
 
 # Classification & Scoring
 
+create table Label (
+    label_id int auto_increment,
+    label_name varchar(255) not null unique,
+    primary key (label_id)
+);
+
+create table Labeltag (
+    label_tag_id int auto_increment,
+    label_tag_name varchar(255) not null unique,
+    primary key (label_tag_id)
+);
+
+create table LabelLabeltag (
+    label_id int,
+    label_tag_id int,
+    primary key (label_id, label_tag_id),
+    foreign key (label_id) references Label(label_id) on delete cascade,
+    foreign key (label_tag_id) references Labeltag(label_tag_id)
+);
+
+create ProductLabel (
+    product_id int,
+    label_id int,
+    primary key (product_id, label_id),
+    foreign key (product_id) references Product(product_id) on delete cascade,
+    foreign key (label_id) references Label(label_id)
+);
+
+create table Score (
+    product_id int,
+    nutriscore_grade_producer varchar(255),
+    nutriscore_grade varchar(255),
+    nutriscore_score decimal(2, 0),
+    environmental_score_grade varchar(255),
+    environmental_score_score decimal(2, 0),
+    packaging_score decimal(2, 0),
+    origin_of_ingredients_score decimal(2, 0),
+    production_system_score decimal(2, 0),
+    threatened_species_score decimal(2, 0),
+    primary key (product_id),
+    foreign key (product_id) references Product(product_id) on delete cascade
+);
+
+
+
+
+# Reference & Metadata
+
+create table Referencedata (
+    product_id int,
+    conservation_conditions_fr varchar(255),
+    preparation_fr varchar(255),
+    customer_service_fr varchar(255),
+    primary key (product_id),
+    foreign key (product_id) references Product(product_id) on delete cascade
+);
+
+create table Datasource (
+    data_source_id int auto_increment,
+    data_source varchar(255),
+    primary key (data_source_id)
+);
+
+create table ProductDatasource (
+    product_id int,
+    data_source_id int,
+    primary key (product_id, data_source_id),
+    foreign key (product_id) references Product(product_id) on delete cascade,
+    foreign key (data_source_id) references Datasource(data_source_id)
+);
+
 
 
 
