@@ -236,16 +236,12 @@ create table ProductPackagingtype (
 
 # Nutrition
 
-create table Nutrientfact (
-    product_id int,
-    nutrient_name varchar(255),
-    nutrient_value double not null,
-    nutrient_prepared_value double not null,
-    unit_id int not null,
-    primary key (product_id, nutrient_name),
-    foreign key (product_id) references Product(product_id) on delete cascade,
-    foreign key (nutrient_name) references Nutrient(nutrient_name),
-    foreign key (unit_id) references Unit(unit_id)
+create table Unit (
+    unit_id int auto_increment,
+    unit_name varchar(255) not null unique,
+    unit_symbol varchar(255) not null unique,
+    conversion_factor_to_base double not null,
+    primary key (unit_id)
 );
 
 create table Nutrient (
@@ -256,12 +252,16 @@ create table Nutrient (
     foreign key (unit_id) references Unit(unit_id)
 );
 
-create table Unit (
-    unit_id int auto_increment,
-    unit_name varchar(255) not null unique,
-    unit_symbol varchar(255) not null unique,
-    conversion_factor_to_base double not null,
-    primary key (unit_id)
+create table Nutrientfact (
+    product_id int,
+    nutrient_name varchar(255),
+    nutrient_value double not null,
+    nutrient_prepared_value double not null,
+    unit_id int not null,
+    primary key (product_id, nutrient_name),
+    foreign key (product_id) references Product(product_id) on delete cascade,
+    foreign key (nutrient_name) references Nutrient(nutrient_name),
+    foreign key (unit_id) references Unit(unit_id)
 );
 
 create table Nutritionfact (
@@ -297,7 +297,7 @@ create table LabelLabeltag (
     foreign key (label_tag_id) references Labeltag(label_tag_id)
 );
 
-create ProductLabel (
+create table ProductLabel (
     product_id int,
     label_id int,
     primary key (product_id, label_id),
@@ -358,3 +358,11 @@ create table ProductDatasource (
 #                                                         SET DEFAULT -> Sets child column values to a default value (rarely used in MySQL)
 #                                                         RESTRICT	  -> Prevents deletion/update of parent row if child rows exist (checked immediately)
 #                                                         NO ACTION	  -> Similar to RESTRICT, but checked at the end of the statement
+
+
+
+
+# CREATE TABLE	Create a new table
+# RENAME TABLE	Rename an existing table
+# ALTER TABLE	Modify table structure (add/remove columns, change types, etc.)
+# DROP TABLE	Delete a table

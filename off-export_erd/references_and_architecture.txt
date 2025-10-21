@@ -29,5 +29,5 @@ Architecure
 - Model Layer
 - Diagram Layer
 - SQL Layer (relational)
-- DMS Layer (MySQL Workbench)
+- DMS Layer (Database Client -> run on cloud and docker)
 - Python Layer (SQL-Injection)
