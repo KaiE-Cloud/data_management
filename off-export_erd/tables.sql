@@ -9,14 +9,17 @@ create table Product (
     code int not null,
     lc char(2) not null,
     quantity int,
+    quantity_unit_id int,
     serving_size int,
+    serving_size_unit_id int,
     obsolete boolean default 0,
-    obsolete_since_date date,
+    obsolete_since_date date default null,
     link varchar(255),
     nova_group decimal(1, 0) not null default 4,
     nova_group_tag varchar(255) not null default 'en:4-ultra-processed-food-and-drink-products',
-    source_field_publication datetime,
-    primary key (product_id)
+    primary key (product_id),
+    foreign key (quantity_unit_id) references Unit(unit_id),
+    foreign key (serving_size_unit_id) references Unit(unit_id)
 );
 
 create table Producttranslation (
