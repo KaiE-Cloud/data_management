@@ -11,6 +11,10 @@ import mysql.connector
 
 def convert_to_null(data):
     converted_to_null = [None if isinstance(x, float) and math.isnan(x) else x for x in data]
+    #converted_to_null = [
+    #    "NULL" if (x is None or (isinstance(x, float) and math.isnan(x))) else x
+    #    for x in data
+    #]
     return converted_to_null
 
 
@@ -34,7 +38,7 @@ def to_int_or_nan(value):
 
 ## iterate and list folder
 def list_folder():
-    directory = Path("C:\\Users\\eton_\\OneDrive\\Dokumente\\GFN\\data_management\\off-export_erd\\")
+    directory = Path("C:\\Users\\Student\\Documents\\GFN\\LF-PV-2A Prüfungsvorbereitung FIAE - Teil 2 - schriftliche Prüfungen (Prüfungsbereich 2, 3 und 4) 31.03.2025-05.05.2025\\data_management\\off-export_erd\\")
     pulls = []
     for csv_file in directory.iterdir():
         if csv_file.is_file() and csv_file.suffix.lower() == '.csv':
@@ -51,7 +55,7 @@ def list_folder():
 
 ## read csv
 def read_csv(file_name):
-    filename = "C:\\Users\\eton_\\OneDrive\\Dokumente\\GFN\\data_management\\off-export_erd\\" + file_name
+    filename = "C:\\Users\\Student\\Documents\\GFN\\LF-PV-2A Prüfungsvorbereitung FIAE - Teil 2 - schriftliche Prüfungen (Prüfungsbereich 2, 3 und 4) 31.03.2025-05.05.2025\\data_management\\off-export_erd\\" + file_name
     df = pd.read_csv(
         filename,
         encoding="latin1",         # safer encoding
@@ -73,68 +77,16 @@ for x in range(len(pulls)):
 
     df = read_csv(pulls[x])
 
-    #code, lc, quantity, serving_size, obsolete, obsolete_since_date, link, off:nova_groups, off:nova_groups_tags
-
-    print()
-    if 'code' in df.columns:
-        codes = df['code'].tolist()
-        codes = [to_int_or_nan(v) for v in codes]
-        codes = convert_to_null(codes)
-        print(len(codes))
-        print("codes:", codes[1:1000])
-    print()
-    if 'lc' in df.columns:
-        lcs = df['lc'].tolist()
-        lcs = convert_to_null(lcs)
-        print(len(lcs))
-        print("lcs:", lcs[1:1000])
-    print()
-    if 'quantity' in df.columns:
-        quantities = df['quantity'].tolist()
-        quantities = convert_to_null(quantities)
-        print(len(quantities))
-        print("quantities:", quantities[1:1000])
-    print()
-    if 'serving_size' in df.columns:
-        serving_sizes = df['serving_size'].tolist()
-        serving_sizes = convert_to_null(serving_sizes)
-        print(len(serving_sizes))
-        print("serving_sizes:", serving_sizes[1:1000])
-    print()
-    if 'obsolete' in df.columns:
-        obsolete = df['obsolete'].tolist()
-        obsolete = convert_to_null(obsolete)
-        print(len(obsolete))
-        print("obsolete:", obsolete[1:1000])
-    print()
-    if 'obsolete_since_date' in df.columns:
-        obsolete_since_dates = df['obsolete_since_date'].tolist()
-        obsolete_since_dates = convert_to_null(obsolete_since_dates)
-        print(len(obsolete_since_dates))
-        print("obsolete_since_dates:", obsolete_since_dates[1:1000])
-    print()
-    if 'link' in df.columns:
-        links = df['link'].tolist()
-        links = convert_to_null(links)
-        print(len(links))
-        print("links:", links[1:1000])
-    print()
-    if 'off:nova_groups' in df.columns:
-        off_nova_groups = df['off:nova_groups'].tolist()
-        off_nova_groups = convert_to_null(off_nova_groups)
-        print(len(off_nova_groups))
-        print("off_nova_groups:", off_nova_groups[1:1000])
-    print()
-    if 'off:nova_groups_tags' in df.columns:
-        off_nova_groups_tags = df['off:nova_groups_tags'].tolist()
-        off_nova_groups_tags = convert_to_null(off_nova_groups_tags)
-        print(len(off_nova_groups_tags))
-        print("off_nova_groups_tags:", off_nova_groups_tags[1:1000])
-    input()
+    if 'stores' in df.columns:
+        store_name = df['stores'].tolist()
+        store_name = convert_to_null(store_name)
+    if 'stores_tags' in df.columns:
+        store_tag = df['stores_tags'].tolist()
+        store_tag = convert_to_null(store_tag)
 
 
 
-'''
+
 # Connect to database
 conn = mysql.connector.connect(
     host="localhost",
@@ -142,30 +94,39 @@ conn = mysql.connector.connect(
     password="100%Safe",
     database="open_food_facts"
 )
-'''
-table_name = "Product"
-attributes = "code, lc, quantity, serving_size, obsolete, obsolete_since_date, link, nova_group, nova_group_tag"
 
-#cursor = conn.cursor()
+cursor = conn.cursor()
+
+query = """
+insert into store
+(store_id, store_name, store_tag)
+values
+(%s, %s, %s)
+"""
+
+for x in range(0, len(store_name)):
+    
+    print('test ' + str(x))
+
+    store_id = x+1
+
+    if store_name[x] != None:
+        store_name[x] = str(store_name[x])
+    if store_tag[x] != None:
+        store_tag[x] = str(store_tag[x])
+
+    values = (
+        store_id,
+        store_name[x],
+        store_tag[x]
+    )
+
+    cursor.execute(query, values)
 
 
 
 
-for x in range(1, len(codes)):
-    #values = ""
-
-    #codes[x] + ", " + lcs[x] + ", " + quantities[x] + ", " + serving_sizes[x] + ", " + obsolete[x] + ", " + obsolete_since_dates[x] + ", " + links[x] + ", " + off_nova_groups[x] + ", " + off_nova_groups_tags[x]
-    print()
-    print("insert into " + table_name + "(" + attributes + ") values(" + str(codes[x]) + ", " + str(lcs[x]) + ", " + str(quantities[x]) + ", " + str(serving_sizes[x]) + ", " + str(obsolete[x]) + ", " + str(obsolete_since_dates[x]) + ", " + str(links[x]) + ", " + str(off_nova_groups[x]) + ", " + str(off_nova_groups_tags[x]) + ");")
-    #cursor.execute("insert into " + table_name + "(" + attributes + ") values(" + values + ");")
-input()
-
-
-
-'''
-for row in cursor.fetchall():
-    print(row)
+conn.commit()
 
 cursor.close()
 conn.close()
-'''

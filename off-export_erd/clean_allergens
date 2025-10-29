@@ -1,0 +1,60 @@
+import pandas as pd
+import csv
+
+# Load CSV
+#df = pd.read_csv("C:\\Users\\Student\\Documents\\GFN\\LF-PV-2A Prüfungsvorbereitung FIAE - Teil 2 - schriftliche Prüfungen (Prüfungsbereich 2, 3 und 4) 31.03.2025-05.05.2025\\data_management\\off-export_erd\\openfoodfacts_export.csv")
+#"C:\\Users\\Student\\Documents\\GFN\\LF-PV-2A Prüfungsvorbereitung FIAE - Teil 2 - schriftliche Prüfungen (Prüfungsbereich 2, 3 und 4) 31.03.2025-05.05.2025\\data_management\\off-export_erd\\"
+# Mapping of common allergens to English (extend as needed)
+df = pd.read_csv(
+    r"C:\Users\Student\Documents\GFN\LF-PV-2A Prüfungsvorbereitung FIAE - Teil 2 - schriftliche Prüfungen (Prüfungsbereich 2, 3 und 4) 31.03.2025-05.05.2025\data_management\off-export_erd\openfoodfacts_export.csv",
+    sep='\t',
+    encoding='latin-1',
+    engine='python',
+    quoting=csv.QUOTE_NONE     # ignore quotes
+    #on_bad_lines=False
+)
+allergen_map = {
+    'Gluten': 'Gluten',
+    'Lait': 'Milk',
+    'Milk': 'Milk',
+    'Eier': 'Eggs',
+    'Uova': 'Eggs',
+    'Œufs': 'Eggs',
+    'Soja': 'Soy',
+    'Soybeans': 'Soy',
+    'Arachides': 'Peanuts',
+    'Peanuts': 'Peanuts',
+    'Fruits à coque': 'Tree nuts',
+    'Frutta a guscio': 'Tree nuts',
+    'Schalenfrüchte': 'Tree nuts',
+    'Sesam': 'Sesame',
+    'Graines de sésame': 'Sesame',
+    'Moutarde': 'Mustard',
+    'Poisson': 'Fish',
+    'Crustacés': 'Crustaceans',
+    'Lupini': 'Lupin',
+    'Avoine': 'Oats',
+    'Anhydride sulfureux et sulfites': 'Sulphites',
+    'Orange': 'Orange',
+    'Leche': 'Milk',
+    'Huevos': 'Eggs',
+    # Add more as needed
+}
+
+def normalize_allergens(cell):
+    if pd.isna(cell):
+        return ''
+    # Split by comma, strip spaces
+    items = [x.strip() for x in str(cell).split(',')]
+    # Map and deduplicate
+    normalized = sorted({allergen_map.get(item.split()[0], item) for item in items})
+    return ', '.join(normalized)
+
+print(df.columns.tolist())
+input()
+
+# Apply to column
+df['allergens_normalized'] = df['allergens'].apply(normalize_allergens)
+
+# Save cleaned CSV
+df.to_csv('allergens_normalized.csv', index=False)

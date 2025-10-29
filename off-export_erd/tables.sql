@@ -6,11 +6,11 @@
 
 create table Product (
     product_id int auto_increment,
-    code int not null,
-    lc char(2) not null,
-    quantity int,
+    code bigint,
+    lc char(2),
+    quantity varchar(255),
     quantity_unit_id int,
-    serving_size int,
+    serving_size varchar(255),
     serving_size_unit_id int,
     obsolete boolean default 0,
     obsolete_since_date date default null,
@@ -102,8 +102,8 @@ create table ProductFoodgroup (
 
 create table Store (
     store_id int auto_increment,
-    store_name varchar(255) not null unique,
-    store_tag varchar(255) not null unique,
+    store_name varchar(255) unique,
+    store_tag varchar(255),
     primary key (store_id)
 );
 
